@@ -3,7 +3,7 @@ set -e
 
 echo "Installing and configuring iptables..."
 apt-get update
-apt-get install -y iptables-legacy iptables-persistent netfilter-persistent
+apt-get install -y iptables iptables-legacy iptables-persistent netfilter-persistent
 update-alternatives --set iptables /usr/sbin/iptables-legacy
 update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 update-alternatives --display iptables
