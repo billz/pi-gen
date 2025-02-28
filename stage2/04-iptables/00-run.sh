@@ -7,7 +7,7 @@ LOG_FILE="${ROOTFS_DIR}/var/log/iptables-setup.log"
 echo "Starting iptables setup" | tee -a "$LOG_FILE"
 
 # Install firewall config script and service
-install -m 755 files/config-routing.sh "${ROOTFS_DIR}/usr/local/bin/config-routing.sh"
+install -m 755 files/raspap-routing.sh "${ROOTFS_DIR}/usr/local/bin/raspap-routing.sh"
 install -m 644 files/routing.service "${ROOTFS_DIR}/etc/systemd/system/routing.service"
 
 # Verify installation
