@@ -5,22 +5,17 @@ if command -v nft &> /dev/null; then
     echo "Using nftables"
 
     cat <<EOF | sudo tee /etc/nftables.conf
-table inet filter {
-    chain input {
-        type filter hook input priority 0; policy accept;
-    }
-    chain forward {
-        type filter hook forward priority 0; policy accept;
-    }
-    chain output {
-        type filter hook output priority 0; policy accept;
-    }
-}
-table ip nat {
-    chain postrouting {
-        type nat hook postrouting priority 100;
-        ip saddr 192.168.50.0/24 masquerade
-    }
+table inet ap {
+	chain routethrough {
+		type nat hook postrouting priority srcnat; policy accept;
+		oifname "eth0" masquerade
+	}
+
+	chain fward {
+		type filter hook forward priority filter; policy accept;
+		iifname "eth0" oifname "wlan0" ct state established,related accept
+		iifname "wlan0" oifname "eth0" accept
+	}
 }
 EOF
 
