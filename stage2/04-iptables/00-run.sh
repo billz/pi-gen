@@ -3,7 +3,7 @@
 
 set -x  # Enable debugging
 
-echo "Starting iptables setup"
+echo "Starting IP routing setup"
 
 # Install routing config script and service
 install -m 755 files/raspap-routing.sh "${ROOTFS_DIR}/usr/local/bin/raspap-routing.sh"
@@ -15,7 +15,7 @@ ls -l "${ROOTFS_DIR}/etc/systemd/system/"
 
 # Enable IP routing on first boot
 on_chroot << EOF
-systemctl enable routing.service 2>&1 | tee -a "$LOG_FILE"
+systemctl enable routing.service
 EOF
 
-echo "Finished iptables setup"
+echo "Finished IP routing setup"
